@@ -1,0 +1,17 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	defer fmt.Println("Deffered statement")
+
+	fmt.Println("Starting the main function")
+
+	os.Exit(1)
+
+	// This wil never be excetued
+	fmt.Println("End of main function")
+}

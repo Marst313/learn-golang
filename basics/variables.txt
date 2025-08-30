@@ -1,0 +1,30 @@
+package basics
+
+import "fmt"
+
+var middleName string = "Cane"
+
+func main() {
+
+	// var name string = "John"
+	// var name1 = "Jane"
+	// var age int
+
+	// count := 10
+	lastName := "Smith"
+	firstName := "Lord"
+	middleName := "Karma"
+
+	fmt.Println(firstName, middleName, lastName)
+	// Default values
+	// Numeric Types : 0
+	// Boolean Types : false
+	// String Types : ""
+	// Pointers, slices, maps, functions, and structs Types : nil
+
+}
+
+func printname() {
+	firstname := "Micheal"
+	fmt.Println(firstname)
+}

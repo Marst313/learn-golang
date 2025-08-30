@@ -1,0 +1,85 @@
+package main
+
+import "fmt"
+
+type Person struct {
+	firstName     string
+	lastName      string
+	age           int
+	address       Address
+	PhoneHomeCell // Embeded anonyymous struct
+}
+
+type PhoneHomeCell struct {
+	home string
+	cell string
+}
+
+type Address struct {
+	city    string
+	country string
+}
+
+func (a Person) fullName() string {
+	return a.firstName + " " + a.lastName
+}
+
+func (p *Person) incrementAgeByOne() {
+	p.age += 1
+}
+
+func main() {
+
+	p := Person{
+		firstName: "Karma",
+		lastName:  "Dharma",
+		age:       20,
+		address: Address{
+			city:    "Surakarta",
+			country: "Indonesia",
+		},
+		PhoneHomeCell: PhoneHomeCell{
+			home: "21312321321",
+			cell: "2132132313",
+		},
+	}
+
+	fmt.Println(p.cell, p.address.city)
+
+	// p1 := Person{
+	// 	firstName: "Mutiara",
+	// 	lastName:  "Wardani",
+	// 	age:       20,
+	// }
+
+	p2 := Person{
+		firstName: "Jane",
+		age:       25,
+	}
+	p2.address.city = "New york"
+	p2.address.country = "USA"
+	p2.PhoneHomeCell.cell = "213213213123"
+	p2.PhoneHomeCell.home = "213213213123"
+
+	fmt.Println(p2.cell)
+
+	// fmt.Println(p.firstName)
+	// fmt.Println(p1.firstName)
+	// fmt.Println(p.fullName())
+
+	// ! Anonymous Structs
+	// user := struct {
+	// 	username string
+	// 	email    string
+	// }{
+	// 	username: "user123",
+	// 	email:    "pseduoemail@example.org",
+	// }
+
+	// fmt.Println(user.email)
+
+	// fmt.Println(p.age)
+	// p.incrementAgeByOne()
+	// fmt.Println(p.age)
+
+}

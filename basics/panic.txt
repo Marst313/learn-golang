@@ -1,0 +1,18 @@
+package main
+
+import "fmt"
+
+func main() {
+	// panic(interface{})
+	process(10)
+
+	process(-1)
+
+}
+
+func process(input int) {
+	if input < 0 {
+		panic("input must be a non-negative number")
+	}
+	fmt.Println("Processing input:", input)
+}
