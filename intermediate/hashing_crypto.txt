@@ -1,0 +1,72 @@
+package main
+
+import (
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/base64"
+	"fmt"
+	"io"
+)
+
+func main() {
+	password := "password123"
+
+	// hash256 := sha256.Sum256([]byte(password))
+	// hash512 := sha512.Sum512([]byte(password))
+
+	// fmt.Println(password)
+	// fmt.Println(hash256)
+	// fmt.Println(hash512)
+	// fmt.Printf("Sha 256 has HEX val :%x\n ", hash256)
+	// fmt.Printf("Sha 512 has HEX val :%x\n ", hash512)
+
+	salt, err := generateSalt()
+
+	if err != nil {
+		fmt.Println("Error generating salt ", err)
+		return
+	}
+
+	// Hash the password with salt
+	signUpHash := hashPassword(password, salt)
+
+	// Store password in db, just printing now
+	saltStr := base64.StdEncoding.EncodeToString(salt)
+	fmt.Println("Salt", saltStr)    // simulate storing in db
+	fmt.Println("Hash", signUpHash) // simulate storing in db
+
+	// Verify password
+	decodedSalt, err := base64.StdEncoding.DecodeString(saltStr)
+	if err != nil {
+		fmt.Println("Unable to decode salt:", err)
+		return
+	}
+
+	loginHash := hashPassword(password, decodedSalt)
+
+	if signUpHash == loginHash {
+		fmt.Println("Successfully login")
+	} else {
+		fmt.Println("Login failed")
+	}
+
+}
+
+func generateSalt() ([]byte, error) {
+	salt := make([]byte, 16)
+
+	_, err := io.ReadFull(rand.Reader, salt)
+	if err != nil {
+		return nil, err
+	}
+
+	return salt, nil
+}
+
+// FUNCTION TO HASH PASSWORD WITH SALT
+func hashPassword(password string, salt []byte) string {
+	saltedPassword := append(salt, []byte(password)...)
+	hash256 := sha256.Sum256(saltedPassword)
+
+	return base64.StdEncoding.EncodeToString(hash256[:])
+}

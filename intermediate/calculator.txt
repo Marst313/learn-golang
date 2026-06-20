@@ -1,0 +1,138 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+
+	reader := bufio.NewReader(os.Stdin)
+
+	for {
+		fmt.Println("------ This is calculator using go ------")
+		fmt.Println("1. Add")
+		fmt.Println("2. Minus")
+		fmt.Println("3. Multiple")
+		fmt.Println("4. Divided")
+		fmt.Println("5. Modules")
+
+		fmt.Print("Choose an option: ")
+		value, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+		value = strings.TrimSpace(value)
+		intVal, err := strconv.ParseFloat(value, 64)
+		if err != nil {
+			fmt.Println("Failed to convert number")
+			return
+		}
+
+		fmt.Print("How much number you want to calculate: ")
+		totalValue, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+		totalValue = strings.TrimSpace(totalValue)
+		total, err := strconv.Atoi(totalValue)
+		if err != nil {
+			fmt.Println("Failed to convert number")
+			return
+		}
+
+		switch intVal {
+		case 1:
+			var valueData []float64
+			valueData = GetValue(total, valueData)
+
+			var result float64
+			for _, value := range valueData {
+				result += value
+			}
+
+			fmt.Printf("Final results is %.2f \n", result)
+			return
+		case 2:
+			var valueData []float64
+			valueData = GetValue(total, valueData)
+
+			var result = valueData[0]
+			for i := 1; i < len(valueData); i++ {
+				result -= valueData[i]
+			}
+
+			fmt.Printf("Final results is %.2f \n", result)
+
+			return
+		case 3:
+			var valueData []float64
+			valueData = GetValue(total, valueData)
+
+			var result = valueData[0]
+			for i := 1; i < len(valueData); i++ {
+				result *= valueData[i]
+			}
+
+			fmt.Printf("Final results is %.2f \n", result)
+
+			return
+
+		case 4:
+			var valueData []float64
+			valueData = GetValue(total, valueData)
+
+			var result = valueData[0]
+			for i := 1; i < len(valueData); i++ {
+				result /= valueData[i]
+			}
+
+			fmt.Printf("Final results is %.2f \n", result)
+
+			return
+
+		case 5:
+			var valueData []float64
+			valueData = GetValue(1, valueData)
+
+			var result = int(valueData[0]) % 2
+
+			if result == 0 {
+				fmt.Println("Nilai ini tidak sisa", result, valueData[0])
+				return
+			} else {
+				fmt.Println("Nilai ini sisa jika di modules", result, valueData[0])
+				return
+
+			}
+
+		}
+
+	}
+
+}
+
+func GetValue(count int, result []float64) []float64 {
+	reader := bufio.NewReader(os.Stdin)
+
+	for i := 1; i <= count; i++ {
+		fmt.Printf("Value %v : ", i)
+		valueString, _ := reader.ReadString('\n')
+		valueString = strings.TrimSpace(valueString)
+		valInteger, err := strconv.ParseFloat(valueString, 64)
+
+		if err != nil {
+			fmt.Printf("Please input a number only: %v", err.Error())
+			return nil
+		}
+		result = append(result, valInteger)
+	}
+
+	return result
+
+}

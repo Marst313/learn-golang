@@ -1,0 +1,6 @@
+go mod init simplegrpcclient
+
+go get google.golang.org/grpc
+
+protoc --go_out=. --go-grpc_out=. proto/main.proto
+

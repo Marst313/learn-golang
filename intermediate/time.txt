@@ -1,0 +1,68 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// Print local time
+	// fmt.Println(time.Now())
+
+	// Spesific time
+	// specificTime := time.Date(2024, time.July, 30, 23, 59, 59, 0, time.UTC)
+	// fmt.Println(specificTime)
+
+	//* FOR PARSING AND FORMATTING IN GO should use 2006-01-02 15:04:05 *//
+
+	// ! 1. Parse time
+	// parsedTime, _ := time.Parse("2006-01-02", "2020-05-01")      // Mon Jan 2 15:04:05 MST 2006
+	// parsedTime1, _ := time.Parse("06-01-02", "20-05-01")         // Mon Jan 2 15:04:05 MST 2006
+	// parsedTime2, _ := time.Parse("06-1-2", "20-5-1")             // Mon Jan 2 15:04:05 MST 2006
+	// parsedTime3, _ := time.Parse("06-1-2 15-04", "20-5-1 18-03") // Mon Jan 2 15:04:05 MST 2006
+
+	// fmt.Println("parsed time 1 : ", parsedTime)
+	// fmt.Println("parsed time 1 : ", parsedTime1)
+	// fmt.Println("parsed time 2 : ", parsedTime2)
+	// fmt.Println("parsed time 3 : ", parsedTime3)
+
+	// ! 2. Formatting time
+	t := time.Now()
+	// fmt.Println("Formatted time : ", t.Format("Monday 06-01-02 15-04-05"))
+
+	// oneDayLater := t.Add(time.Hour * 24)
+	// fmt.Println(oneDayLater.Weekday())
+
+	// fmt.Println("Rounded Time : ", t.Round(time.Hour))
+
+	// loc, _ := time.LoadLocation("Asia/Jakarta")
+	// t = time.Date(2024, time.July, 8, 14, 16, 40, 00, time.UTC)
+
+	// ! 3. CONVERT TO SPESIFIC LOCATION
+	// tLocal := t.In(loc)
+
+	// roundedTime := t.Round(time.Hour)
+	// roundedTimeLocal := roundedTime.In(loc)
+
+	// fmt.Println("Original time (UTC): ", t)
+	// fmt.Println("Original time (Local): ", tLocal)
+	// fmt.Println("Rounded Time (UTC): ", roundedTime)
+	// fmt.Println("Rounded Time Local (Local): ", roundedTimeLocal)
+
+	fmt.Println("Truncated time : ", t.Truncate(time.Hour))
+
+	loc, _ := time.LoadLocation("America/New_York")
+
+	// Convert time to location
+	tInNy := t.In(loc)
+	fmt.Println("New York time : ", tInNy)
+
+	t1 := time.Date(2024, time.July, 4, 12, 0, 0, 0, time.UTC)
+	t2 := time.Date(2024, time.July, 4, 18, 0, 0, 0, time.UTC)
+
+	duration := t2.Sub(t1)
+	fmt.Println(duration)
+
+	fmt.Println("Is t2 after t1 ? ", t2.After(t1))
+
+}

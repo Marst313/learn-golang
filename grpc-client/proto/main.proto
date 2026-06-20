@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+
+package main;
+
+import "greeter.proto";
+
+option go_package = "/proto/gen;mainapipb";
+
+// Calculate a number
+service Calculate {
+    //  this service is for sum 2 number
+    rpc Add(AddRequest) returns (AddResponse);
+}
+
+// Service for greeting
+service Greeter {
+    // Greeting a new user
+  rpc Greet (HelloRequest) returns (HelloResponse);
+}
+
+message AddRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+
+message AddResponse {
+  int32 sum = 1;
+}
