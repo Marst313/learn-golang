@@ -1,0 +1,68 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+)
+
+func checkError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+func main() {
+
+	// err := os.Mkdir("subdir1", 0755)
+	// checkError(err)
+
+	// defer os.RemoveAll("subdir1")
+	// os.WriteFile("subdir1/file", []byte(""), 0755)
+
+	// checkError(os.MkdirAll("subdir/parent/child", 0755))
+	// checkError(os.MkdirAll("subdir/parent/child1", 0755))
+	// checkError(os.MkdirAll("subdir/parent/child2", 0755))
+	// checkError(os.MkdirAll("subdir/parent/child3", 0755))
+	// os.WriteFile("subdir/parent/file", []byte(""), 0755)
+	// os.WriteFile("subdir/parent/child/file", []byte(""), 0755)
+
+	result, err := os.ReadDir("subdir/parent")
+	checkError(err)
+
+	fmt.Println("Reading subdir/parent")
+	for _, entry := range result {
+		fmt.Println(entry.Name(), entry.IsDir(), entry.Type())
+	}
+
+	//! CHANGE DIRECTORY
+	checkError(os.Chdir("subdir/parent/child"))
+
+	result, err = os.ReadDir(".")
+	checkError(err)
+
+	fmt.Println("Reading subdir/parent/child")
+	for _, entry := range result {
+		fmt.Println(entry, "ini line 46")
+	}
+
+	checkError(os.Chdir("../../../"))
+	dir, err := os.Getwd()
+	checkError(err)
+	fmt.Println(dir, "ini line 52")
+
+	// Filepath.Walk and filepath.WalkDir
+	pathfile := "subdir/parent/child"
+	fmt.Println("Walking Directory")
+
+	err = filepath.WalkDir(pathfile, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			fmt.Println("Error:", err)
+			return err
+		}
+		fmt.Println(path, " ini line 63")
+		return nil
+	})
+
+	checkError(err)
+}

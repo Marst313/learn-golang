@@ -1,0 +1,28 @@
+package main
+
+import (
+	"fmt"
+	"path/filepath"
+)
+
+func main() {
+	relativePath := "./example.txt"
+	absolutePath := "/home/Work/learning/learn-golang/intermediate/example.txt"
+
+	joinedPath := filepath.Join("home", "Work", "learn-golang", "intermediate", "example.txt")
+	fmt.Println("Joined PATH :", joinedPath)
+
+	normalizedPath := filepath.Clean("./data/..data/file.txt")
+	fmt.Println("Normalized Path:", normalizedPath)
+
+	dir, file := filepath.Split("/home/user/docs/file.txt")
+	fmt.Println("File", file)
+	fmt.Println("Dir", dir)
+	fmt.Println(filepath.Base("/home/user/docs/"))
+
+	fmt.Println("Is relativePath variable absolute : ", filepath.IsAbs(relativePath))
+	fmt.Println("Is absolutePath variable absolute : ", filepath.IsAbs(absolutePath))
+
+	fmt.Println(filepath.Ext(absolutePath))
+
+}

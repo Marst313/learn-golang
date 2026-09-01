@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	// ! Create file with name output.txt
+	file, err := os.Create("./intermediate/output.txt")
+	if err != nil {
+		fmt.Println("Error creating file.", err)
+		return
+	}
+	defer file.Close()
+
+	// ! WRITE DATA to file
+	data := []byte("Hello world\n\n\n")
+	_, err = file.Write(data)
+
+	if err != nil {
+		fmt.Println("Error writing file", err)
+		return
+	}
+	fmt.Println("Data has been written to file successfully")
+
+	file, err = os.Create("./intermediate/writeString.txt")
+	if err != nil {
+		fmt.Println("Error creating file.", err)
+		return
+
+	}
+	defer file.Close()
+
+	_, err = file.WriteString("Hello Go!\n")
+	if err != nil {
+		fmt.Println("Error writing file", err)
+		return
+	}
+
+	fmt.Println("Data has been written to file successfully")
+
+}

@@ -1,0 +1,12 @@
+DEBUG: 2026/07/08 10:57:41 logging.go:39: This is a debug message.
+WARN:2026/07/08 10:57:41 logging.go:41: This is a warning message.
+INFO:2026/07/08 10:57:41 logging.go:42: This is a info message.
+ERROR:2026/07/08 10:57:41 logging.go:43: This is an error.
+DEBUG: 2026/07/08 10:58:07 /Users/inyomandharma/Work/learning/learn-golang/intermediate/logger/logging.go:39: This is a debug message.
+WARN:2026/07/08 10:58:07 /Users/inyomandharma/Work/learning/learn-golang/intermediate/logger/logging.go:41: This is a warning message.
+INFO:2026/07/08 10:58:07 /Users/inyomandharma/Work/learning/learn-golang/intermediate/logger/logging.go:42: This is a info message.
+ERROR:2026/07/08 10:58:07 /Users/inyomandharma/Work/learning/learn-golang/intermediate/logger/logging.go:43: This is an error.
+{"level":"info","msg":"This is an info message.","time":"2026-07-08T11:11:56+07:00"}
+{"level":"warning","msg":"This is a warning message.","time":"2026-07-08T11:11:56+07:00"}
+{"level":"error","msg":"This is an error message.","time":"2026-07-08T11:11:56+07:00"}
+{"level":"info","method":"GET","msg":"User logged in.","time":"2026-07-08T11:11:56+07:00","username":"John Doe"}
